@@ -51,8 +51,8 @@ export const portfolioItems: PortfolioItem[] = [
   },
   {
     id: '12',
-    title: 'Music Video Reaction: Latest Hit',
-    description: 'Reacting to the latest music video from a popular artist. Can\'t stop watching!',
+    title: 'Hanan Shaah Collective',
+    description: 'Hananasha mode ON 🎶✨ Bathery vibes → Next Level! @hanaaaneyy',
     thumbnail: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&h=450&fit=crop',
     videoUrl: 'https://www.instagram.com/reel/DRPadkzjb16/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==',
     platform: 'instagram',
