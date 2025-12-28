@@ -14,7 +14,7 @@ export const stats: Stat[] = [
   {
     id: '2',
     label: 'Instagram Followers',
-    value: 42000,
+    value: 48000,
     icon: 'FaInstagram',
     platform: 'instagram',
     prefix: '',
