@@ -71,7 +71,7 @@ export default function About() {
             <span className="text-gray-900 dark:text-white">That Resonates</span>
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            Passionate content creator specializing in lifestyle, entertainment, and educational videos
+            Passionate content creator specializing in lifestyle, entertainment videos
           </p>
         </motion.div>
 
