@@ -98,7 +98,7 @@ export default function About() {
                     <div className="text-sm text-gray-300">Total Views</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-white mb-1">42M+</div>
+                    <div className="text-3xl font-bold text-white mb-1">48K+</div>
                     <div className="text-sm text-gray-300">Followers</div>
                   </div>
                   <div className="text-center">
