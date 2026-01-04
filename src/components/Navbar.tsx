@@ -49,48 +49,66 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToSection = (href: string) => {
-    const id = href.substring(1);
-    const element = document.getElementById(id);
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const targetId = href.replace('#', '');
+    const element = document.getElementById(targetId);
+
+    // Close mobile menu first
+    setIsMobileMenuOpen(false);
+
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setIsMobileMenuOpen(false);
+      // Small timeout to allow the menu close animation to start/finish
+      // and prevent layout thrashing on mobile devices
+      setTimeout(() => {
+        const offset = 80;
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+
+        setActiveSection(targetId);
+      }, 100);
     }
   };
+
+
 
   return (
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'glass-strong shadow-lg'
-          : 'bg-transparent'
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
+        ? 'glass-strong shadow-lg'
+        : 'bg-transparent'
+        }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <motion.div
+          <motion.a
+            href="#home"
             whileHover={{ scale: 1.05 }}
             className="text-2xl font-bold gradient-text cursor-pointer"
-            onClick={() => scrollToSection('#home')}
           >
             Ansal John
-          </motion.div>
+          </motion.a>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
-              <motion.button
+              <motion.a
                 key={item.name}
-                onClick={() => scrollToSection(item.href)}
-                className={`relative px-3 py-2 text-sm font-medium transition-colors ${
-                  activeSection === item.href.substring(1)
-                    ? 'text-purple-500 dark:text-purple-400'
-                    : 'text-gray-700 dark:text-gray-300 hover:text-purple-500 dark:hover:text-purple-400'
-                }`}
+                href={item.href}
+                onClick={(e) => handleNavClick(e, item.href)}
+                className={`relative px-3 py-2 text-sm font-medium transition-colors ${activeSection === item.href.substring(1)
+                  ? 'text-purple-500 dark:text-purple-400'
+                  : 'text-gray-700 dark:text-gray-300 hover:text-purple-500 dark:hover:text-purple-400'
+                  }`}
                 whileHover={{ y: -2 }}
               >
                 {item.name}
@@ -100,7 +118,7 @@ export default function Navbar() {
                     className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-primary"
                   />
                 )}
-              </motion.button>
+              </motion.a>
             ))}
           </div>
 
@@ -159,18 +177,18 @@ export default function Navbar() {
           >
             <div className="px-4 pt-4 pb-6 space-y-3">
               {navItems.map((item) => (
-                <motion.button
+                <motion.a
                   key={item.name}
-                  onClick={() => scrollToSection(item.href)}
-                  className={`block w-full text-left px-4 py-3 rounded-lg transition-colors ${
-                    activeSection === item.href.substring(1)
-                      ? 'bg-purple-500/20 text-purple-500'
-                      : 'text-gray-700 dark:text-gray-300 hover:bg-white/5'
-                  }`}
+                  href={item.href}
+                  onClick={(e) => handleNavClick(e, item.href)}
+                  className={`block w-full text-left px-4 py-3 rounded-lg transition-colors ${activeSection === item.href.substring(1)
+                    ? 'bg-purple-500/20 text-purple-500'
+                    : 'text-gray-700 dark:text-gray-300 hover:bg-white/5'
+                    }`}
                   whileHover={{ x: 5 }}
                 >
                   {item.name}
-                </motion.button>
+                </motion.a>
               ))}
               <div className="flex items-center justify-center space-x-4 pt-4 border-t border-white/10 dark:border-gray-700/10">
                 {socialLinks.map((social) => {
